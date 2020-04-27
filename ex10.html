@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<h1>Object</h1>
+<script>
+	var cowrkers = {
+		"porgrammer":"egoing",
+		"disinger":"leezche"
+		};
+		document.write("porgrammer : " + cowrkers.porgrammer + "<br>");
+		document.write("disinger : " + cowrkers.disinger + "<br>");
+		cowrkers.bookkeeper = "duru";
+		document.write("bookkeeper : " + cowrkers.bookkeeper + "<br>");
+		cowrkers["data scientist"] = "taeho";
+		document.write("data scientist : " + cowrkers["data scientist"] + "<br>");
+</script>
+<h2>Iterate</h2>
+<script>
+	for(var key in cowrkers){
+		document.write(cowrkers[key]+'<br>');
+	}
+</script>
+<h2>Property & Method</h2>
+<script>
+	cowrkers.showAll = function(){
+		for(var key in this){
+			document.write(key + " : " + this[key]+'<br>');
+		}
+	}
+	cowrkers.showAll();
+</script>
+</body>
+</html>
