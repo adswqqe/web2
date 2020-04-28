@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	<script src="calc.js"></script>
+	<title>CALC</title>
+
+	<style>
+		.container {
+		  position: relative;
+		  height: 50%;
+		}
+
+		.jumbotron {
+		  position: absolute;
+		  top: 50%;
+		  left:50%;
+		  transform: translate(-50%,-50%);
+		}
+				/*body,html {
+ 		 height: 100%;
+ 		 width: 100%;
+		}*/
+	</style>
+</head>
+
+<body>
+<h1 class="text-center">CALC</h1>
+
+<!-- <div class="container" role="main">
+    
+  <div class="jumbotron" style="height: 60%">
+			<input class="btn btn-default" type="button" value="7">
+			<input class="btn btn-default" type="button" value="8">
+			<input class="btn btn-default" type="button" value="9">
+  </div>
+    <div class="jumbotron">
+			<input class="btn btn-default" type="button" value="4">
+			<input class="btn btn-default" type="button" value="5">
+			<input class="btn btn-default" type="button" value="6">
+  </div>
+
+</div> -->
+
+<div class="container d-flex h-100">
+	<div class="row">
+		<div class="col text-center">
+			<div id ="display"></div>
+		</div>
+		<div class="col text-center">
+			<input class="btn btn-default" type="button" value="7" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="8" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="9" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="*" onclick="
+			asd.DisplayOperator(this);">
+		</div>
+		<div class="text-center">
+			<input class="btn btn-default" type="button" value="4" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="5" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="6" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="-" onclick="
+			asd.DisplayOperator(this);">
+		</div>
+		<div class="text-center">
+			<input class="btn btn-default" type="button" value="1" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="2" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="3" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="+" onclick="
+			asd.DisplayOperator(this);">
+		</div>
+		<div class="text-center">
+			<input class="btn btn-default" type="button" value="0" onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="." onclick="
+			asd.DisplayNumber(this);">
+			<input class="btn btn-default" type="button" value="=" onclick="
+			asd.CalcNumber(this);">
+		</div>
+</div>
+</div>
+
+</body>
+</html>

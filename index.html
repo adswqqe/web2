@@ -3,40 +3,7 @@
 <head>
 	<title>Index</title>
 	<meta charset="utf-8">
-	<script>
-		function LinksSetColor(color){
-			var aTag = document.getElementsByTagName('a');
-			var atagLength = aTag.length;
-			for (var i = atagLength - 1; i >= 0; i--) {
-				aTag[i].style.color=color;
-			}
-		}
-
-		function bodySetColor(color){
-			document.getElementById('target').style.color = color;
-
-		}
-
-		function bodySetBackgoundColor(color){
-			document.getElementById('target').style.backgroundColor = color;
-		}
-		function nightDayHandler(self){
-			var target = document.getElementById('target');
-
-			if(self.value === 'night'){
-				self.value = 'day';
-				bodySetBackgoundColor('black');
-				bodySetColor('white');
-				LinksSetColor('powderblue');
-
-			} else {
-				self.value = 'night';
-				bodySetBackgoundColor('white');
-				bodySetColor('black');
-				LinksSetColor('blue');
-			}
-		}
-	</script>
+	<script src="colors.js"></script>
 </head>
 <body id="target">
 <h1><a href="index.html">WEB</a></h1>
