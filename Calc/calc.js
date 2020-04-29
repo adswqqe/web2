@@ -1,86 +1,136 @@
 var asd ={
-	numberList: new Array(),
-	operatorList: new Array(),
-	calcNumberList: new Array(),
-	isOperator:false,
 	temp:0,
-	numberListIndex:0,
-	isFrist:true,
-	isRfrist:true,
-	isLastOperatorMultiorDivide:false,
-	LastOperator:'',
-	leftNumber:0,
-	rightNumber:0,
-	isLeft:true,
+	InputList: new Array(),
+	result:0,
+	numberCounter:0,
+	operatorCounter:0,
+	isReset:false,
 	DisplayNumber:function(self){
-		// if(asd.isRfrist)
-		// {
-		// 	asd.numberList.push(0);
-		// 	isRfrist =false;
-		// }
-		if(asd.isLeft)
-			asd.leftNumber += self.value;
-		else
-			asd.rightNumber += self.value;
-		//console.log(asd.numberList[asd.numberListIndex]);
+		if(asd.isReset)
+		{
+			document.getElementById("display").innerHTML = "";
+			asd.isReset = false;
+		}
+		asd.temp += self.value;
 		document.getElementById("display").innerHTML += self.value;
 	},
 	DisplayOperator:function(self){
-		if(!asd.isLeft)
-		{
-			switch (asd.LastOperator){
-				case '+':
-				asd.temp =  parseInt(asd.leftNumber) + parseInt(asd.rightNumber);
-				break;
-				case '-':
-				asd.temp =  parseInt(asd.leftNumber) - parseInt(asd.rightNumber);
-				break;
-				case '*':
-				asd.temp =  parseInt(asd.leftNumber) * parseInt(asd.rightNumber);
-				break;
-				case '/':
-				asd.temp =  parseInt(asd.leftNumber) / parseInt(asd.rightNumber);
-				break;
-			}
-			asd.leftNumber = 0;
-			asd.rightNumber = 0;
-			asd.isLeft = true;
-			console.log(asd.temp);
-			asd.calcNumberList.push(asd.temp);
-			asd.temp = 0;
-		}
-		else
-			asd.isLeft = false;
-
-		// if(asd.isLastOperatorMultiorDivide && asd.numberListIndex >= 1)
-		// 	{temp = asd.numberList[asd.numberListIndex-1] * asd.numberList[asd.numberListIndex];
-		// 		console.log(temp);
-		// 	}
-
-		// if((self.value === '*' || self.value === '/'))
-		// 	asd.isLastOperatorMultiorDivide = true;
-		asd.LastOperator = self.value;
-		asd.isFrist = false;
-		//asd.numberListIndex +=1;
-
-		//asd.operatorList.push(self.value);
+		asd.InputList.push(asd.temp);
+		asd.InputList.push(self.value);
+		asd.numberCounter++;
+		asd.operatorCounter++;
+		asd.temp = 0;
 		document.getElementById("display").innerHTML += self.value;
 	},
 	CalcNumber:function(self){
-		var i = 0;
-		var result = 0;
-		     console.log(asd.operatorList.length);
-		while(asd.operatorList.length > i)
+		if(asd.temp > 0)
 		{
-		     console.log(asd.operatorList[i]);
-			if(asd.operatorList[i] === '+')
-				result = asd.leftNumber + asd.rightNumber;
-
-			asd.operatorList.shift();
-			i += 1;
+			asd.InputList.push(asd.temp);
+			asd.numberCounter++;
+			asd.temp = 0;
 		}
-		asd.isOperator = false;
+		if(!(asd.operatorCounter+1 == asd.numberCounter))
+		{
+			alert('수식에러');
+			asd.numberCounter = 0;
+			asd.operatorCounter = 0;
+			asd.isReset = true;
+			asd.InputList = new Array();
+			document.getElementById("display").innerHTML = result;
+		}
 
-		document.getElementById("display").innerHTML = (new Function('return' + '1+1'))();
+
+		var finalResult = 0;
+
+		while(asd.InputList.length != 0)
+		{
+			if(asd.InputList.indexOf('*') != -1)
+			{
+				var index = asd.InputList.indexOf('*');
+				var tempIndex = 0;
+				if(index == 1)
+					tempIndex = index +2;
+				else
+					tempIndex = index;
+					if(index + 1 < asd.InputList.length)
+					{
+						var tempList = asd.InputList.splice(index-1, tempIndex);
+						finalResult =  parseFloat(tempList[0]) * parseFloat(tempList[2]);
+						console.log(tempList);
+						console.log(asd.InputList);
+						console.log(finalResult);
+						asd.InputList.splice(index-1, 0, finalResult);
+						console.log(asd.InputList);
+					}
+			}
+			else if(asd.InputList.indexOf('/') != -1){
+				var index = asd.InputList.indexOf('/');
+				var tempIndex = 0;
+				if(index == 1)
+					tempIndex = index +2;
+				else
+					tempIndex = index;
+					if(index + 1 < asd.InputList.length)
+					{
+						var tempList = asd.InputList.splice(index-1, tempIndex);
+						finalResult =  parseInt(tempList[0]) / parseInt(tempList[2]);
+						console.log(tempList);
+						console.log(asd.InputList);
+						console.log(finalResult);
+						asd.InputList.splice(index-1, 0, finalResult);
+						console.log(asd.InputList);
+					}
+			}
+			else
+			{
+				var tempList = asd.InputList.splice(0);
+				var leftNumber = 0;
+				var rightNumber = 0;
+				var operator = '';
+				var result = 0;
+				while(tempList.length != 0)
+				{
+					var element = tempList.shift();
+
+					if(isNaN(parseFloat(element)))
+						operator = element;
+					else
+					{
+						if(Math.abs(leftNumber) <= 0)
+						{
+							leftNumber = parseFloat(element);
+							console.log(leftNumber);
+
+						}
+						else
+						{
+							rightNumber = parseFloat(element)
+
+							switch(operator)
+							{
+								case '+':
+								result = leftNumber + rightNumber;
+								break;
+								case '-':
+								result = leftNumber - rightNumber;
+								break;
+							}
+							if(tempList.length != 0)
+								tempList.unshift(result);
+							else
+								finalResult = result;
+							console.log(tempList);
+							leftNumber = 0;
+							rightNumber =0;
+						}
+					}
+					console.log(tempList);
+				}
+			}
+		}
+		asd.numberCounter = 0;
+		asd.operatorCounter = 0;
+		asd.isReset = true;
+		document.getElementById("display").innerHTML = finalResult;
 	}
 };
